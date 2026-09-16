@@ -1,0 +1,16 @@
+# build output (PyInstaller)
+build/
+dist/
+__pycache__/
+*.pyc
+
+# job data
+jobs/
+tests/out/
+
+# local test-job scratch and design mockups: kept on disk, not shipped in the repo
+jobs_uitest/
+ui-mockups/
+
+# the demo-video pipeline (Blender venv, rendered frames, vendored bpy-renderer) lives outside git
+video/

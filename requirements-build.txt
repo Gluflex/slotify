@@ -1,0 +1,4 @@
+# Only needed to build the standalone Windows .exe (pyinstaller step2kit.spec); not required to run
+# the tool from source.
+-r requirements.txt
+pyinstaller==6.22.3
