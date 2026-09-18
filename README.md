@@ -4,18 +4,32 @@
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
 ![Platform: Windows](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 
+<p align="center">
+  <img src="docs/media/slotify_demo.gif" width="100%" alt="Demo: a white CAD enclosure turns into a plywood kit; the Slotify app takes enclosure_demo.step and generates a kit; the nested sheet is drawn; the plates assemble">
+</p>
+
 Upload a plate-based STEP model, enter your laser's kerf, get a nested DXF of a kit that clicks
 together with finger joints, tabs and slots. Deterministic geometry only: no machine learning, no
 network call, runs entirely on your own machine.
 
+Box generators such as MakerCase or boxes.py start from a list of dimensions. Slotify starts from the
+model you already drew, including sloped panels, windows, dividers and joints at angles other than 90°.
+
 Born out of winning the RSA Delft robotics hackathon (Sept 2026), where the same pipeline turned a
 team's Onshape robot body into a laser-cuttable kit in minutes.
 
-<p align="center">
-  <img src="docs/media/example_exploded.png" width="70%" alt="Exploded view of a laser-cut enclosure kit, showing seven jointed plywood plates">
-</p>
+## Download (Windows)
 
-## Quickstart
+**[Download Slotify.exe](https://github.com/Gluflex/slotify/releases/latest/download/Slotify.exe)**:
+no Python needed. Double-click it and the app opens in its own window; try it on one of the
+[samples](samples/). It is a single ~150 MB file with the geometry kernel bundled, so the window takes a
+few seconds to appear, and each kit adds about ten seconds of start-up on top of the actual computation.
+
+The exe is not code-signed, so Windows SmartScreen may show "Windows protected your PC". Click
+**More info → Run anyway**. The window uses the WebView2 runtime that ships with Windows 10 and 11; if it
+is missing, Slotify opens in your browser instead.
+
+## Quickstart (from source)
 
 ```bash
 git clone https://github.com/Gluflex/slotify.git
@@ -91,6 +105,10 @@ slot — not forced, not loose — names your real kerf.
 notes, the maximum overlap between parts (must be 0), the reconstruction check and the assembly order.
 
 <p align="center">
+  <img src="docs/media/example_exploded.png" width="70%" alt="Exploded view of a laser-cut enclosure kit, showing seven jointed plywood plates">
+</p>
+
+<p align="center">
   <img src="docs/media/example_tray_assembly.png" width="70%" alt="Rendered assembly preview of the simple tray sample">
 </p>
 
@@ -106,11 +124,14 @@ notes, the maximum overlap between parts (must be 0), the reconstruction check a
   assume Windows paths; the core CLI (`python -m step2kit`) has no OS-specific code but is untested
   elsewhere.
 
-## Building a standalone .exe (optional)
+## Building the standalone .exe yourself (optional)
+
+A prebuilt `Slotify.exe` is attached to every [release](https://github.com/Gluflex/slotify/releases).
+To build it from source:
 
 ```bash
 pip install -r requirements-build.txt
-pyinstaller step2kit.spec
+pyinstaller step2kit.spec                                    # writes dist/Slotify.exe
 ```
 
 Not required to use the tool — `python server.py` and `python -m step2kit` run directly from source.
